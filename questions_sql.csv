@@ -1,0 +1,9 @@
+Question,Option1,Option2,Option3,Option4,CorrectAnswer,Scenario
+"Quelle commande SQL permet de sélectionner toutes les colonnes d'une table ?","SELECT *","SELECT ALL","SELECT COLUMNS","FETCH *",1,"Vous devez afficher tous les détails des utilisateurs de votre application."
+"Comment joindre deux tables en SQL ?","COMBINE","MERGE","JOIN","CONNECT",3,"Vous devez associer les commandes avec les informations des clients."
+"Quelle clause SQL permet de filtrer les résultats ?","FILTER","WHERE","HAVING","SEARCH",2,"Vous devez trouver tous les produits dont le prix est supérieur à 100€."
+"Comment trier les résultats par ordre décroissant ?","SORT DESC","ORDER DESC","ORDER BY DESC","SORT BY DESC",3,"Vous affichez les scores des joueurs du plus élevé au plus bas."
+"Quelle fonction SQL permet de compter le nombre de lignes ?","COUNT()","SUM()","TOTAL()","NUMBER()",1,"Vous devez calculer le nombre total d'utilisateurs inscrits."
+"Comment supprimer une table de la base de données ?","DELETE TABLE","REMOVE TABLE","DROP TABLE","CLEAR TABLE",3,"Vous devez supprimer une table temporaire après utilisation."
+"Quelle commande permet d'ajouter une nouvelle colonne ?","ADD COLUMN","ALTER ADD","ALTER TABLE ADD","MODIFY ADD",3,"Vous devez ajouter un champ 'date_inscription' à votre table utilisateurs."
+"Comment mettre à jour des données existantes ?","MODIFY","CHANGE","ALTER","UPDATE",4,"Vous devez modifier l'adresse email d'un utilisateur."

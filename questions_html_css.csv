@@ -1,0 +1,9 @@
+Question,Option1,Option2,Option3,Option4,CorrectAnswer,Scenario
+"Quelle balise HTML est utilisée pour créer un lien hypertexte ?","<link>","<a>","<href>","<url>",2,"Vous créez un menu de navigation avec des liens vers différentes pages."
+"Comment centrer un élément horizontalement avec CSS ?","text-align: center","align: center","margin: auto","center: true",3,"Vous devez centrer un conteneur div dans la page."
+"Quelle propriété CSS permet de changer la police d'écriture ?","text-style","font-family","text-font","font-type",2,"Vous personnalisez la typographie de votre site web."
+"Comment rendre une image responsive en CSS ?","img-responsive: true","width: 100%","responsive: true","scale: auto",2,"Vous devez adapter une image à différentes tailles d'écran."
+"Quelle balise HTML5 définit un en-tête de section ?","<header>","<heading>","<head>","<top>",1,"Vous structurez une page avec les éléments sémantiques HTML5."
+"Comment définir une couleur de fond en CSS ?","color: blue","bgcolor: blue","background: blue","background-color: blue",4,"Vous stylisez l'arrière-plan d'un élément."
+"Quelle unité CSS est relative à la taille de la police ?","px","em","pt","inch",2,"Vous définissez des marges qui s'adaptent à la taille du texte."
+"Comment créer une grille responsive en CSS ?","grid-system: auto","display: grid","flex: grid","grid: auto",2,"Vous créez une mise en page en grille qui s'adapte aux différents écrans."

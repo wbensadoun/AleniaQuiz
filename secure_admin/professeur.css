@@ -1,0 +1,79 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+}
+
+.container {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    text-align: center;
+    max-width: 500px;
+    width: 100%;
+}
+
+h1 {
+    color: #333333;
+    font-weight: normal;
+}
+
+#drop-zone {
+    border: 2px dashed #999999;
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px 0;
+    background-color: #f8f8f8;
+    cursor: pointer;
+}
+
+#drop-zone p {
+    margin: 0;
+    color: #666666;
+}
+
+#file-select-btn {
+    background-color: #6c757d;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 10px 0;
+}
+
+#file-select-btn:hover {
+    background-color: #5a6268;
+}
+
+#file-input {
+    display: none;
+}
+
+#submit-btn {
+    background-color: #6c757d;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin-top: 20px;
+}
+
+#submit-btn:disabled {
+    background-color: #cccccc;
+    cursor: not-allowed;
+}
+
+#status-message {
+    margin-top: 20px;
+    color: #666666;
+}

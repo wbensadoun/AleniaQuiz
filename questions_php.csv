@@ -1,0 +1,9 @@
+Question,Option1,Option2,Option3,Option4,CorrectAnswer,Scenario
+"Quelle fonction PHP permet de démarrer une session ?","session_start()","start_session()","begin_session()","init_session()",1,"Vous développez un système d'authentification et devez gérer les sessions utilisateur."
+"Comment vérifier si une variable est vide en PHP ?","isEmpty()","is_empty()","empty()","check_empty()",3,"Vous validez un formulaire et devez vérifier si un champ obligatoire a été rempli."
+"Quelle est la bonne syntaxe pour définir une constante en PHP ?","const","define()","constant()","set_const()",2,"Vous devez définir une constante pour la configuration de votre base de données."
+"Comment inclure un fichier PHP une seule fois ?","include","require","include_once","require_once",4,"Vous incluez un fichier de configuration et voulez éviter les inclusions multiples."
+"Quelle fonction permet de hasher un mot de passe en PHP ?","encrypt()","hash()","password_hash()","md5()",3,"Vous devez sécuriser le stockage des mots de passe dans votre base de données."
+"Comment récupérer la longueur d'une chaîne en PHP ?","length()","strlen()","string_length()","count_chars()",2,"Vous devez vérifier si un nom d'utilisateur respecte une longueur minimale."
+"Quelle superglobale contient les données POST ?","$_POST","$POST","$FORM","$REQUEST",1,"Vous récupérez les données d'un formulaire envoyé en méthode POST."
+"Comment connecter PHP à une base de données MySQL ?","mysql_connect()","mysqli_connect()","db_connect()","pdo_connect()",2,"Vous devez établir une connexion sécurisée à votre base de données MySQL."

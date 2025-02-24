@@ -1,0 +1,9 @@
+Question,Option1,Option2,Option3,Option4,CorrectAnswer,Scenario
+"Quelle méthode JavaScript est utilisée pour ajouter un élément à la fin d'un tableau ?",".push()",".append()",".add()",".insert()",1,"Vous développez une application de gestion de tâches et devez ajouter une nouvelle tâche à la liste."
+"Comment déclarer une variable qui ne peut pas être modifiée en JavaScript ?","var","let","const","def",3,"Vous créez une configuration qui ne doit pas changer pendant l'exécution du programme."
+"Quelle est la méthode pour sélectionner un élément par son ID en JavaScript ?","getElementById()","querySelector()","selectElement()","findById()",1,"Vous devez manipuler un bouton spécifique dans votre formulaire."
+"Comment vérifier le type d'une variable en JavaScript ?","checkType()","typeOf()","typeof","getType()",3,"Vous devez vérifier si une variable est une chaîne de caractères avant de la manipuler."
+"Quelle méthode est utilisée pour convertir une chaîne en nombre ?","parseInt()","stringToNumber()","convert()","toNumber()",1,"Vous recevez l'âge d'un utilisateur sous forme de chaîne et devez effectuer des calculs avec."
+"Quel est l'opérateur de comparaison stricte en JavaScript ?","==","===","=","equals",2,"Vous comparez deux valeurs et devez vous assurer qu'elles sont du même type."
+"Comment créer une fonction anonyme en JavaScript ?","function(){}","anonymous()","()=>{}","new Function()",3,"Vous développez un gestionnaire d'événements pour un bouton."
+"Quelle méthode permet d'arrondir un nombre à l'entier le plus proche ?","Math.round()","Math.floor()","Math.ceil()","Math.approx()",1,"Vous calculez une moyenne et devez afficher un résultat sans décimales."

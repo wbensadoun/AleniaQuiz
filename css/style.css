@@ -1,0 +1,128 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap');
+
+/* Style global */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    line-height: 1.6;
+    background-color: #f5f5f5;
+    min-height: 100vh;
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    overflow-x: hidden;
+}
+
+.container {
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    background: white;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+    margin: 20px;
+}
+
+h1, h2 {
+    color: #2196F3;
+    text-align: center;
+    margin-bottom: 30px;
+    font-size: 2em;
+}
+
+.welcome-text {
+    text-align: center;
+    color: #666;
+    margin-bottom: 30px;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 8px;
+    color: #666;
+    font-size: 0.9em;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 2px solid #e0e0e0;
+    border-radius: 5px;
+    font-size: 1em;
+    transition: all 0.3s ease;
+}
+
+.form-group input:focus {
+    border-color: #2196F3;
+    outline: none;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+.button {
+    width: 100%;
+    padding: 12px;
+    background: #2196F3;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 1.1em;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.button:hover {
+    background: #1976D2;
+    transform: translateY(-2px);
+}
+
+.error-message {
+    background: #ffebee;
+    color: #c62828;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.success-message {
+    background: #e8f5e9;
+    color: #2e7d32;
+    padding: 10px;
+    border-radius: 5px;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.links {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.links a {
+    color: #666;
+    text-decoration: none;
+    margin: 0 10px;
+    display: inline-block;
+}
+
+.links a:hover {
+    color: #2196F3;
+}
+
+.divider {
+    text-align: center;
+    margin: 20px 0;
+    color: #666;
+}
