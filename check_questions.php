@@ -40,7 +40,7 @@ header('Content-Type: text/html; charset=utf-8');
 
     if ($result->num_rows > 0) {
         echo "<table>";
-        echo "<tr><th>ID</th><th>Question</th><th>Options</th><th>Réponse Correcte</th><th>Scénario</th></tr>";
+        echo "<tr><th>ID</th><th>Question</th><th>Options</th><th>Réponse Correcte</th><th>Scénario</th><th>Timer (s)</th></tr>";
         
         while($row = $result->fetch_assoc()) {
             echo "<tr>";
@@ -49,6 +49,7 @@ header('Content-Type: text/html; charset=utf-8');
             echo "<td><pre>" . htmlspecialchars($row['options']) . "</pre></td>";
             echo "<td>" . htmlspecialchars($row['correct_letter']) . "</td>";
             echo "<td>" . htmlspecialchars($row['scenario']) . "</td>";
+            echo "<td>" . htmlspecialchars($row['timer']) . "</td>"; // Afficher le timer
             echo "</tr>";
         }
         
