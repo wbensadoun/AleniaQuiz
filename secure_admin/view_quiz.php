@@ -145,6 +145,11 @@ $questions = json_decode($quiz['questions_json'], true);
             display: flex;
             gap: 10px;
         }
+        .timer-display {
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 10px;
+        }
     </style>
 </head>
 <body>
@@ -192,6 +197,11 @@ $questions = json_decode($quiz['questions_json'], true);
                     
                     <div class="scenario">
                         Scénario : <?php echo htmlspecialchars($question['scenario']); ?>
+                    </div>
+
+                    <!-- Afficher le timer pour la question -->
+                    <div class="timer-display">
+                        Temps alloué : <?php echo $question['timer']; ?> secondes
                     </div>
                     
                     <div class="options">
