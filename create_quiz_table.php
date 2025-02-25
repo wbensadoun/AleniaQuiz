@@ -8,7 +8,7 @@ $conn->query($sql);
 $sql = "DROP TABLE IF EXISTS quizzes;";
 $conn->query($sql);
 
-// Créer la table quizzes avec la bonne structure
+// Créer la table quizzes avec la colonne question_timer
 $sql = "CREATE TABLE quizzes (
     id INT AUTO_INCREMENT PRIMARY KEY,
     file_name VARCHAR(255) NOT NULL,
@@ -16,6 +16,7 @@ $sql = "CREATE TABLE quizzes (
     created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
     questions_json LONGTEXT NOT NULL,
     total_questions INT NOT NULL,
+    question_timer INT NOT NULL DEFAULT 30, -- Temps par défaut : 30 secondes
     UNIQUE KEY unique_file_path (file_path)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;";
 
