@@ -26,35 +26,29 @@
     padding: 2rem;
 }
 
-h1 {
+.timer {
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: var(--error-color);
+}
+
+.progress {
+    font-size: 16px;
+    margin-bottom: 20px;
+    color: var(--text-color);
+}
+
+.scenario {
+    font-size: 18px;
+    margin-bottom: 20px;
     color: var(--primary-color);
-    text-align: center;
-    margin-bottom: 2rem;
-    font-size: 2.5em;
-    font-weight: 700;
-    text-shadow: 0 1px 2px rgba(0,0,0,0.1);
 }
 
 .question {
-    margin-bottom: 2rem;
-    padding: 1.5rem;
-    background: var(--surface-color);
-    border: 1px solid var(--border-color);
-    border-radius: 12px;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    transition: transform 0.2s ease;
-}
-
-.question:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
-}
-
-.question h3 {
-    margin-top: 0;
-    color: var(--primary-color);
-    font-size: 1.3rem;
-    margin-bottom: 1.5rem;
+    font-size: 20px;
+    margin-bottom: 20px;
+    color: var(--text-color);
 }
 
 .options {
@@ -85,36 +79,30 @@ input[type="radio"] {
     margin-right: 10px;
 }
 
-button[type="submit"] {
-    display: block;
-    width: 100%;
-    max-width: 300px;
-    margin: 2rem auto;
-    padding: 1rem 2rem;
-    font-size: 1.1rem;
+.buttons {
+    margin-top: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.btn {
+    padding: 10px 20px;
+    font-size: 16px;
     color: white;
     background-color: var(--primary-color);
     border: none;
     border-radius: 8px;
     cursor: pointer;
     transition: all 0.3s ease;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
 }
 
-button[type="submit"]:hover {
+.btn:hover {
     background-color: var(--primary-hover);
     transform: translateY(-2px);
-    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
 }
 
-button[type="submit"]:active {
+.btn:active {
     transform: translateY(0);
-}
-
-button[type="submit"]:disabled {
-    background-color: var(--disabled-color);
-    cursor: not-allowed;
-    transform: none;
 }
 
 .result {
@@ -133,63 +121,7 @@ button[type="submit"]:disabled {
     font-size: 1.8rem;
 }
 
-.error {
-    color: var(--error-color);
-    padding: 1rem;
-    margin: 1rem 0;
-    background: var(--surface-color);
-    border: 1px solid var(--error-color);
-    border-radius: 8px;
-}
-
-.debug-output {
-    background: var(--surface-color);
-    color: #ffaa00;
-    padding: 15px;
-    margin: 15px 0;
-    border-radius: 8px;
-    border: 1px solid #ffaa00;
-    font-family: monospace;
-    font-size: 14px;
-    white-space: pre-wrap;
-}
-
 @keyframes fadeIn {
     from { opacity: 0; transform: translateY(-10px); }
     to { opacity: 1; transform: translateY(0); }
-}
-
-/* Media Queries for Dark Mode */
-@media (prefers-color-scheme: dark) {
-    .options label {
-        background-color: #333;
-    }
-    
-    .options label:hover {
-        background-color: #404040;
-    }
-    
-    .debug-output {
-        background-color: #2d2d2d;
-    }
-    
-    button:disabled {
-        background-color: #4a5568;
-    }
-}
-
-/* Accessibility Improvements */
-@media (prefers-reduced-motion: reduce) {
-    * {
-        animation: none !important;
-        transition: none !important;
-    }
-    
-    .question:hover {
-        transform: none;
-    }
-    
-    button:hover {
-        transform: none;
-    }
 }
