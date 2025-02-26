@@ -1,9 +1,9 @@
-Question;Propositions;;;;Reponse;Scenario
-Quelle est la capitale de la France ?;A:Londres;B:Paris;C:Berlin;D:Marseille;B;Un touriste vous demande la capitale de la France
-Quels sont les pays frontaliers de la France ?;A:Belgique;B:Allemagne;C:Suisse;D:Colombie;A;Un géographe étudie les frontières de la France
-Quelle est la couleur du ciel ?;A:Jaune;B:Bleu;C:Vert;D:Rouge;B;Un enfant vous pose la question en regardant par la fenêtre
-Quels sont les langages de programmation web ?;A:Cobra;B:Python;C:JavaScript;D:Java;C;Un développeur web prépare un projet
-Quel est le plus grand océan du monde ?;A:Pacifique;B:Atlantique;C:Indien;D:Arctique;A;Un élève prépare un exposé sur les océans
-Qui a peint la Joconde ?;A:Léonard de Vinci;B:Michel-Ange;C:Picasso;D:Van Gogh;A;Un historien d'art étudie la Renaissance
-Quelles sont les couleurs du drapeau français ?;A:Bleu;B:Blanc;C:Rouge;D:Vert;C;Un enfant apprend les couleurs du drapeau
-Quels sont les océans qui bordent la France ?;A:Atlantique;B:Pacifique;C:Indien;D:Méditerranée;A;Un marin étudie les côtes françaises
+Question;Propositions;;;;Reponse;Scenario;timer
+Quelle est la capitale de la France ?;A:Londres;B:Paris;C:Berlin;D:Marseille;B;Un touriste vous demande la capitale de la France;
+Quels sont les pays frontaliers de la France ?;A:Belgique;B:Allemagne;C:Suisse;D:Colombie;A;Un géographe étudie les frontières de la France;
+Quelle est la couleur du ciel ?;A:Jaune;B:Bleu;C:Vert;D:Rouge;B;Un enfant vous pose la question en regardant par la fenêtre;
+Quels sont les langages de programmation web ?;A:Cobra;B:Python;C:JavaScript;D:Java;C;Un développeur web prépare un projet;
+Quel est le plus grand océan du monde ?;A:Pacifique;B:Atlantique;C:Indien;D:Arctique;A;Un élève prépare un exposé sur les océans;
+Qui a peint la Joconde ?;A:Léonard de Vinci;B:Michel-Ange;C:Picasso;D:Van Gogh;A;Un historien d'art étudie la Renaissance;
+Quelles sont les couleurs du drapeau français ?;A:Bleu;B:Blanc;C:Rouge;D:Vert;C;Un enfant apprend les couleurs du drapeau;
+Quels sont les océans qui bordent la France ?;A:Atlantique;B:Pacifique;C:Indien;D:Méditerranée;A;Un marin étudie les côtes françaises;

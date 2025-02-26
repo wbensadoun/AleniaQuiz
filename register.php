@@ -1,78 +1,172 @@
 <?php
 session_start();
-require_once 'db_connect.php';
 
-if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    $email = $_POST['email'];
+if (isset($_SESSION['user_id'])) {
+    header('Location: index.php');
+    exit();
+}
+
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    $username = $_POST['username'];
     $password = $_POST['password'];
-    $confirm_password = $_POST['confirm_password'];
-    $role = $_POST['role'];
-
-    // Vérification si l'email existe déjà
-    $check_sql = "SELECT * FROM users WHERE username = ?";
-    $check_stmt = $conn->prepare($check_sql);
-    $check_stmt->bind_param("s", $email);
-    $check_stmt->execute();
-    $check_result = $check_stmt->get_result();
-
-    if ($check_result->num_rows > 0) {
-        echo "<div class='error-message'>Cet email est déjà utilisé</div>";
-    } elseif ($password != $confirm_password) {
-        echo "<div class='error-message'>Les mots de passe ne correspondent pas</div>";
+    
+    $conn = new mysqli("localhost", "root", "", "quizzapp");
+    
+    if ($conn->connect_error) {
+        die("Connection failed: " . $conn->connect_error);
+    }
+    
+    // Vérifier si l'utilisateur existe déjà
+    $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
+    $stmt->execute();
+    $result = $stmt->get_result();
+    
+    if ($result->num_rows > 0) {
+        $error = "Cet email est déjà utilisé";
     } else {
-        // Insérer le nouvel utilisateur
-        $sql = "INSERT INTO users (username, password, role) VALUES (?, ?, ?)";
-        $stmt = $conn->prepare($sql);
-        $stmt->bind_param("sss", $email, $password, $role);
-
+        // Par défaut, le rôle est 'eleve'
+        $role = 'eleve';
+        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
+        $stmt->bind_param("sss", $username, $password, $role);
+        
         if ($stmt->execute()) {
-            echo "<div class='success-message'>Inscription réussie ! <a href='login.php'>Se connecter</a></div>";
+            $_SESSION['user_id'] = $conn->insert_id;
+            $_SESSION['username'] = $username;
+            $_SESSION['role'] = $role;
+            header('Location: index.php');
+            exit();
         } else {
-            echo "<div class='error-message'>Erreur lors de l'inscription</div>";
+            $error = "Erreur lors de l'inscription";
         }
     }
+    $conn->close();
 }
 ?>
 
 <!DOCTYPE html>
-<html>
+<html lang="fr">
 <head>
-    <title>Inscription - Quiz App</title>
-    <link rel="stylesheet" href="css/style.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Inscription - Alenia Quiz</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            margin: 0;
+            padding: 0;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .register-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.1);
+            width: 100%;
+            max-width: 400px;
+        }
+        .register-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        .register-header h1 {
+            color: #1a237e;
+            margin: 0;
+            font-size: 2em;
+        }
+        .register-header p {
+            color: #666;
+            margin-top: 0.5rem;
+        }
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #333;
+            font-weight: bold;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        .form-group input:focus {
+            border-color: #1a237e;
+            outline: none;
+        }
+        .submit-btn {
+            width: 100%;
+            padding: 1rem;
+            background: #1a237e;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .submit-btn:hover {
+            background: #0d47a1;
+        }
+        .login-link {
+            text-align: center;
+            margin-top: 1rem;
+        }
+        .login-link a {
+            color: #1a237e;
+            text-decoration: none;
+        }
+        .login-link a:hover {
+            text-decoration: underline;
+        }
+        .error-message {
+            background: #ffebee;
+            color: #c62828;
+            padding: 1rem;
+            border-radius: 5px;
+            margin-bottom: 1rem;
+            text-align: center;
+        }
+    </style>
 </head>
 <body>
-    <div class="container">
-        <h1>Inscription</h1>
-
-        <form method="post" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]); ?>">
-            <div class="form-group">
-                <label for="email">Email :</label>
-                <input type="email" id="email" name="email" required>
+    <div class="register-container">
+        <div class="register-header">
+            <h1>ALENIA Quiz</h1>
+            <p>Créez votre compte pour commencer</p>
+        </div>
+        
+        <?php if (isset($error)): ?>
+            <div class="error-message">
+                <?php echo htmlspecialchars($error); ?>
             </div>
-
+        <?php endif; ?>
+        
+        <form method="POST" action="">
             <div class="form-group">
-                <label for="password">Mot de passe :</label>
+                <label for="username">Email</label>
+                <input type="email" id="username" name="username" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Mot de passe</label>
                 <input type="password" id="password" name="password" required>
             </div>
-
-            <div class="form-group">
-                <label for="confirm_password">Confirmer le mot de passe :</label>
-                <input type="password" id="confirm_password" name="confirm_password" required>
-            </div>
-
-            <div class="form-group">
-                <label for="role">Rôle :</label>
-                <select id="role" name="role" required>
-                    <option value="student">Étudiant</option>
-                    <option value="professor">Professeur</option>
-                </select>
-            </div>
-
-            <button type="submit" class="button">S'inscrire</button>
+            
+            <button type="submit" class="submit-btn">S'inscrire</button>
         </form>
-
-        <div class="links">
-            <a href="login.php">Déjà inscrit ? Se connecter</a>
+        
+        <div class="login-link">
+            Déjà inscrit ? <a href="login.php">Connectez-vous</a>
         </div>
     </div>
 </body>

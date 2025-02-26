@@ -2,7 +2,7 @@
 $servername = "localhost";
 $username = "root";
 $password = "";
-$dbname = "quiz_app";  // Changé de quizzapp à quiz_app
+$dbname = "quizzapp";  
 
 // Créer la connexion
 $conn = new mysqli($servername, $username, $password, $dbname);
