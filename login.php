@@ -12,34 +12,39 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
+    // Connexion à la base de données
     $conn = new mysqli("localhost", "root", "", "quizzapp");
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     
-    $stmt = $conn->prepare("SELECT id, username, role FROM users WHERE username = ? AND password = ?");
-    $stmt->bind_param("ss", $username, $password);
+    $stmt = $conn->prepare("SELECT id, username, password, role FROM users WHERE username = ?");
+    $stmt->bind_param("s", $username);
     $stmt->execute();
     $result = $stmt->get_result();
     
     if ($result->num_rows == 1) {
         $user = $result->fetch_assoc();
-        $_SESSION['user_id'] = $user['id'];
-        $_SESSION['username'] = $user['username'];
-        $_SESSION['role'] = $user['role'];
-        
-        // Redirection en fonction du rôle
-        switch($user['role']) {
-            case 'admin':
-                header('Location: admin_dashboard.php');
-                break;
-            case 'professeur':
-                header('Location: professor_dashboard.php');
-                break;
-            default:
-                header('Location: index.php');
+        if (password_verify($password, $user['password'])) {
+            $_SESSION['user_id'] = $user['id'];
+            $_SESSION['username'] = $user['username'];
+            $_SESSION['role'] = $user['role'];
+            
+            // Redirection en fonction du rôle
+            switch($user['role']) {
+                case 'admin':
+                    header('Location: admin_dashboard.php');
+                    break;
+                case 'professeur':
+                    header('Location: professor_dashboard.php');
+                    break;
+                default:
+                    header('Location: index.php');
+            }
+            exit();
+        } else {
+            $error = "Email ou mot de passe incorrect";
         }
-        exit();
     } else {
         $error = "Email ou mot de passe incorrect";
     }

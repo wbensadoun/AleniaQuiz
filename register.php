@@ -10,13 +10,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     $username = $_POST['username'];
     $password = $_POST['password'];
     
+    // Connexion à la base de données
     $conn = new mysqli("localhost", "root", "", "quizzapp");
     
     if ($conn->connect_error) {
         die("Connection failed: " . $conn->connect_error);
     }
     
-    // Vérifier si l'utilisateur existe déjà
+    // Vérifier si l'email existe déjà
     $stmt = $conn->prepare("SELECT id FROM users WHERE username = ?");
     $stmt->bind_param("s", $username);
     $stmt->execute();
@@ -25,19 +26,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($result->num_rows > 0) {
         $error = "Cet email est déjà utilisé";
     } else {
-        // Par défaut, le rôle est 'eleve'
-        $role = 'eleve';
-        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, ?)");
-        $stmt->bind_param("sss", $username, $password, $role);
+        // Hash du mot de passe
+        $hashed_password = password_hash($password, PASSWORD_DEFAULT);
+        
+        // Insertion du nouvel utilisateur
+        $stmt = $conn->prepare("INSERT INTO users (username, password, role) VALUES (?, ?, 'eleve')");
+        $stmt->bind_param("ss", $username, $hashed_password);
         
         if ($stmt->execute()) {
-            $_SESSION['user_id'] = $conn->insert_id;
+            $_SESSION['user_id'] = $stmt->insert_id;
             $_SESSION['username'] = $username;
-            $_SESSION['role'] = $role;
-            header('Location: index.php');
+            $_SESSION['role'] = 'eleve';
+            header("Location: index.php");
             exit();
         } else {
-            $error = "Erreur lors de l'inscription";
+            $error = "Une erreur est survenue lors de l'inscription";
         }
     }
     $conn->close();

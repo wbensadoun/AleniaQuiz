@@ -1,5 +1,6 @@
 <?php
 session_start();
+require_once 'includes/db.php';
 include 'includes/header.php';
 
 // Vérifier si l'utilisateur est connecté
@@ -8,32 +9,31 @@ if (!isset($_SESSION['user_id'])) {
     exit();
 }
 
-// Connexion à la base de données
-$conn = new mysqli("localhost", "root", "", "quizzapp");
-if ($conn->connect_error) {
-    die("Connection failed: " . $conn->connect_error);
-}
-
 // Récupérer l'ID de l'utilisateur
 $user_id = $_SESSION['user_id'];
 
-// Récupérer tous les quiz disponibles avec les statistiques de l'utilisateur
+// Récupérer tous les quiz disponibles avec les statistiques de l'utilisateur et les permissions de reprise
 $stmt = $conn->prepare("
     SELECT 
         q.*,
         u.username as professor_name,
         COUNT(DISTINCT qu.id) as question_count,
         COUNT(DISTINCT r.id) as attempts,
-        COALESCE(MAX(CAST((r.score * 100 / r.total_questions) as DECIMAL(5,2))), 0) as best_score
+        COALESCE(MAX(CAST((r.score * 100 / r.total_questions) as DECIMAL(5,2))), 0) as best_score,
+        qrp.id as retake_permission_id,
+        qrp.used as permission_used
     FROM quizzes q
     JOIN users u ON q.professor_id = u.id
     LEFT JOIN questions qu ON q.id = qu.quiz_id
-    LEFT JOIN results r ON r.user_id = ? 
+    LEFT JOIN results r ON r.user_id = ? AND r.quiz_id = q.id
+    LEFT JOIN quiz_retake_permissions qrp ON qrp.quiz_id = q.id 
+        AND qrp.user_id = ? 
+        AND qrp.used = 0
     GROUP BY q.id
     ORDER BY q.created_at DESC
 ");
 
-$stmt->bind_param("i", $user_id);
+$stmt->bind_param("ii", $user_id, $user_id);
 $stmt->execute();
 $result = $stmt->get_result();
 ?>
@@ -94,17 +94,26 @@ $result = $stmt->get_result();
             display: block;
             width: 100%;
             padding: 10px;
-            background: #4CAF50;
-            color: white;
             text-align: center;
             border: none;
             border-radius: 5px;
             margin-top: 15px;
             text-decoration: none;
             transition: background 0.3s ease;
+            cursor: pointer;
         }
-        .start-quiz:hover {
+        .start-quiz.enabled {
+            background: #4CAF50;
+            color: white;
+        }
+        .start-quiz.enabled:hover {
             background: #45a049;
+        }
+        .start-quiz.disabled {
+            background: #ccc;
+            color: #666;
+            cursor: not-allowed;
+            pointer-events: none;
         }
         .no-quizzes {
             text-align: center;
@@ -152,9 +161,31 @@ $result = $stmt->get_result();
                             </div>
                             <?php endif; ?>
                         </div>
-                        <a href="quiz.php?id=<?php echo $quiz['id']; ?>" class="start-quiz">
-                            <?php echo $quiz['attempts'] > 0 ? 'Réessayer' : 'Commencer'; ?>
-                        </a>
+                        <?php
+                        $buttonClass = 'start-quiz ';
+                        $buttonText = 'Commencer';
+                        $isDisabled = false;
+
+                        if ($quiz['attempts'] > 0) {
+                            $buttonText = 'Recommencer';
+                            if (!$quiz['retake_permission_id']) {
+                                $buttonClass .= 'disabled';
+                                $isDisabled = true;
+                            }
+                        }
+                        
+                        if (!$isDisabled) {
+                            $buttonClass .= 'enabled';
+                        }
+                        ?>
+                        
+                        <?php if ($isDisabled): ?>
+                            <button class="<?php echo $buttonClass; ?>" disabled><?php echo $buttonText; ?></button>
+                        <?php else: ?>
+                            <a href="quiz.php?id=<?php echo $quiz['id']; ?>" class="<?php echo $buttonClass; ?>">
+                                <?php echo $buttonText; ?>
+                            </a>
+                        <?php endif; ?>
                     </div>
                 <?php endwhile; ?>
             <?php else: ?>

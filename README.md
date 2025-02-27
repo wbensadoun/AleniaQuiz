@@ -1,71 +1,80 @@
-# Alenia Quiz Application
+# Alenia Quiz - Plateforme de Quiz en Ligne
 
-Une application web de quiz moderne et intuitive développée avec PHP et MySQL.
+## Description
+Alenia Quiz est une plateforme web interactive permettant aux professeurs de créer et gérer des quiz, et aux élèves de les passer. Le système inclut un tableau de bord pour suivre les progrès et une interface d'administration.
 
 ## Fonctionnalités
 
-- Création de quiz via upload de fichiers CSV
-- Interface administrateur sécurisée
-- Système de suivi des résultats
-- Design moderne et responsive
+### Pour les Élèves
+- Passage de quiz avec timer
+- Tableau de bord personnalisé
+- Historique des résultats
+- Visualisation des corrections
+
+### Pour les Professeurs
+- Création de quiz via CSV
+- Gestion des quiz existants
+- Suivi des résultats des élèves
+- Statistiques détaillées
+
+### Pour les Administrateurs
 - Gestion des utilisateurs
-
-## Prérequis
-
-- PHP 7.4 ou supérieur
-- MySQL 5.7 ou supérieur
-- Serveur web (Apache recommandé)
-- Extension PHP MySQL
+- Attribution des rôles
+- Supervision globale
 
 ## Installation
 
-1. Clonez le dépôt :
+1. Cloner le repository :
 ```bash
-git clone [URL_DU_REPO]
+git clone https://github.com/wbensadoun/AleniaQuiz.git
 ```
 
-2. Configurez votre base de données MySQL
-
-3. Importez la structure de la base de données :
-```sql
--- La structure sera fournie dans database.sql
+2. Configurer la base de données :
+- Créer une base de données MySQL nommée 'quizzapp'
+- Importer le fichier update_database.php via le navigateur :
+```
+http://localhost/AleniaQuiz/update_database.php
 ```
 
-4. Configurez vos paramètres de connexion dans config.php
+3. Comptes de test :
+- Admin : admin@quiz.com / admin123
+- Professeur : professeur@quiz.com / prof123
+- Élève : eleve1@quiz.com / eleve123
 
-## Structure du Projet
+## Structure des fichiers
 
 ```
-QuizzApp/
-├── css/                  # Styles CSS
-├── includes/            # Fichiers inclus (header, footer)
-├── secure_admin/        # Interface administrateur
-├── uploads/            # Dossier pour les uploads
-└── README.md           # Documentation
+AleniaQuiz/
+├── css/
+│   └── style.css
+├── includes/
+│   └── header.php
+├── database/
+│   └── *.sql
+├── templates/
+│   └── quiz_template.csv
+├── *.php
+└── README.md
 ```
-
-## Utilisation
-
-1. Accédez à l'interface administrateur via `/secure_admin`
-2. Uploadez vos fichiers CSV de questions
-3. Les quiz sont automatiquement créés et disponibles
 
 ## Sécurité
-
-- Authentification requise pour l'administration
-- Validation des entrées utilisateur
+- Mots de passe hashés avec password_hash()
 - Protection contre les injections SQL
+- Vérification des rôles et permissions
 - Sessions sécurisées
 
-## Contribution
+## Technologies utilisées
+- PHP 7.4+
+- MySQL 5.7+
+- HTML5/CSS3
+- JavaScript
 
-Les contributions sont les bienvenues ! N'hésitez pas à :
+## Contribution
 1. Fork le projet
-2. Créer une branche pour votre fonctionnalité
-3. Commiter vos changements
-4. Pusher vers la branche
+2. Créer une branche (`git checkout -b feature/AmazingFeature`)
+3. Commit les changements (`git commit -m 'Add some AmazingFeature'`)
+4. Push vers la branche (`git push origin feature/AmazingFeature`)
 5. Ouvrir une Pull Request
 
-## Licence
-
-[MIT License](LICENSE)
+## License
+Ce projet est sous licence MIT. Voir le fichier `LICENSE` pour plus de détails.

@@ -1,3 +1,27 @@
 # Fichiers système
 .DS_Store
 Thumbs.db
+
+# IDE et éditeurs
+.idea/
+.vscode/
+*.sublime-project
+*.sublime-workspace
+
+# Fichiers de configuration PHP
+includes/db.php
+
+# Fichiers de logs
+*.log
+error_log
+php_error.log
+
+# Fichiers temporaires
+*.tmp
+*.temp
+*.swp
+*.swo
+
+# Dépendances
+/vendor/
+composer.lock

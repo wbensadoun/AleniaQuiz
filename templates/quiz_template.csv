@@ -1,4 +1,4 @@
 Question;Propositions;;;;Reponse;Scenario;timer
-"Quelle est la capitale de la France ?";"A:Paris";"B:Londres";"C:Berlin";"D:Madrid";"A";"La France est un pays d'Europe occidentale.";"30"
-"Combien font 2 + 2 ?";"A:3";"B:4";"C:5";"D:6";"B";"Dans un calcul simple d'addition.";"20"
-"Quelle est la plus grande planète du système solaire ?";"A:Mars";"B:Vénus";"C:Jupiter";"D:Saturne";"C";"Dans notre système solaire, il existe 8 planètes principales.";"25"
+"Quelle est la capitale de la France?";"A:Paris";"B:Londres";"C:Berlin";"D:Madrid";"A";"La capitale de la France est une ville importante en Europe";"30"
+"Qui a peint la Joconde?";"A:Vincent van Gogh";"B:Leonardo da Vinci";"C:Pablo Picasso";"D:Claude Monet";"B";"La Joconde est un tableau célèbre exposé au Louvre";"45"
+"Quel est le plus grand océan du monde?";"A:Océan Atlantique";"B:Océan Indien";"C:Océan Pacifique";"D:Océan Arctique";"C";"L'océan le plus grand couvre une grande partie de la Terre";"30"

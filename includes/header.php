@@ -1,110 +1,200 @@
 <?php
-if (session_status() == PHP_SESSION_NONE) {
+if (session_status() === PHP_SESSION_NONE) {
     session_start();
 }
 ?>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        .main-header {
+            background-color: #2c3e50;
+            padding: 15px 0;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
 
-<header id="main-header">
-    <div class="container">
-        <a href="index.php" class="site-title">Alenia Quiz</a>
-        <nav class="nav-menu">
+        .header-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 20px;
+        }
+
+        .logo {
+            color: white;
+            text-decoration: none;
+            font-size: 1.5em;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo:hover {
+            color: #ecf0f1;
+        }
+
+        .nav-menu {
+            display: flex;
+            gap: 20px;
+            align-items: center;
+        }
+
+        .nav-link {
+            color: white;
+            text-decoration: none;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-link:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .user-menu {
+            position: relative;
+            display: inline-block;
+        }
+
+        .user-button {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .user-button:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .dropdown-menu {
+            position: absolute;
+            right: 0;
+            top: 100%;
+            background: white;
+            border-radius: 5px;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            display: none;
+            min-width: 200px;
+            z-index: 1000;
+        }
+
+        .dropdown-menu.show {
+            display: block;
+        }
+
+        .dropdown-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 20px;
+            color: #333;
+            text-decoration: none;
+            transition: background-color 0.3s;
+        }
+
+        .dropdown-item:hover {
+            background-color: #f8f9fa;
+        }
+
+        .dropdown-divider {
+            height: 1px;
+            background-color: #e9ecef;
+            margin: 8px 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="main-header">
+        <div class="header-content">
+            <a href="index.php" class="logo">
+                <i class="fas fa-graduation-cap"></i>
+                Alenia Quiz
+            </a>
+            
             <?php if (isset($_SESSION['user_id'])): ?>
-                <?php if ($_SESSION['role'] === 'professeur'): ?>
-                    <a href="professor_dashboard.php" class="nav-link">Tableau de bord</a>
-                    <a href="create_quiz.php" class="nav-link">Créer un Quiz</a>
-                    <a href="manage_quizzes.php" class="nav-link">Gérer les Quiz</a>
-                <?php else: ?>
-                    <a href="available_quizzes.php" class="nav-link">Quizzes disponibles</a>
-                    <a href="my_results.php" class="nav-link">Mes résultats</a>
-                <?php endif; ?>
-                
-                <div class="user-info">
-                    <span class="username">
-                        <?php echo htmlspecialchars($_SESSION['username']); ?>
-                    </span>
-                    <a href="logout.php" class="btn btn-outline">Déconnexion</a>
-                </div>
-            <?php else: ?>
-                <a href="login.php" class="btn btn-primary">Se connecter</a>
-                <a href="register.php" class="btn btn-outline">S'inscrire</a>
+                <nav class="nav-menu">
+                    <?php if ($_SESSION['role'] === 'professeur'): ?>
+                        <a href="professor_dashboard.php" class="nav-link">
+                            <i class="fas fa-chalkboard-teacher"></i>
+                            Tableau de bord
+                        </a>
+                        <a href="create_quiz.php" class="nav-link">
+                            <i class="fas fa-plus-circle"></i>
+                            Créer un Quiz
+                        </a>
+                    <?php else: ?>
+                        <a href="available_quizzes.php" class="nav-link">
+                            <i class="fas fa-list"></i>
+                            Quiz disponibles
+                        </a>
+                        <a href="my_results.php" class="nav-link">
+                            <i class="fas fa-chart-bar"></i>
+                            Mes résultats
+                        </a>
+                    <?php endif; ?>
+                    
+                    <div class="user-menu">
+                        <button class="user-button" onclick="toggleDropdown()">
+                            <i class="fas fa-user-circle"></i>
+                            <?php echo htmlspecialchars($_SESSION['username']); ?>
+                            <i class="fas fa-chevron-down"></i>
+                        </button>
+                        <div class="dropdown-menu" id="userDropdown">
+                            <a href="profile.php" class="dropdown-item">
+                                <i class="fas fa-user"></i>
+                                Mon profil
+                            </a>
+                            <div class="dropdown-divider"></div>
+                            <a href="logout.php" class="dropdown-item">
+                                <i class="fas fa-sign-out-alt"></i>
+                                Déconnexion
+                            </a>
+                        </div>
+                    </div>
+                </nav>
             <?php endif; ?>
-        </nav>
-    </div>
-</header>
+        </div>
+    </header>
 
-<style>
-header {
-    background-color: #f5f5f5; /* Couleur de fond du header */
-    padding: 20px 0; /* Ajoutez du padding en haut et en bas du header */
-}
+    <script>
+        function toggleDropdown() {
+            document.getElementById('userDropdown').classList.toggle('show');
+        }
 
-.container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px 20px; /* Padding à l'intérieur du conteneur */
-    max-width: 12000px; /* Limiter la largeur du conteneur */
-    margin: 0 auto; /* Centrer le conteneur */
-}
-
-.site-title {
-    font-size: 24px; /* Taille de la police */
-    color: #333; /* Couleur du texte */
-    text-decoration: none;
-}
-
-.nav-menu {
-    display: flex;
-    align-items: center;
-    margin-left: auto; /* Pousse le contenu à droite */
-}
-
-.nav-link {
-    margin-left: 20px; /* Espacement entre les liens */
-    text-decoration: none;
-    color: #333;
-}
-
-.nav-link:hover {
-    color: #666;
-}
-
-.user-info {
-    display: flex;
-    align-items: center;
-    margin-left: 20px; /* Espacement entre les liens */
-}
-
-.username {
-    font-weight: bold;
-    margin-right: 10px;
-}
-
-.btn {
-    margin-left: 10px; /* Espacement entre les boutons */
-    padding: 10px 20px;
-    border: none;
-    border-radius: 5px;
-    cursor: pointer;
-}
-
-.btn-primary {
-    background-color: #4CAF50;
-    color: #fff;
-}
-
-.btn-primary:hover {
-    background-color: #3e8e41;
-}
-
-.btn-outline {
-    background-color: transparent;
-    border: 1px solid #4CAF50;
-    color: #4CAF50;
-}
-
-.btn-outline:hover {
-    background-color: #4CAF50;
-    color: #fff;
-}
-</style>
+        // Fermer le menu déroulant si l'utilisateur clique en dehors
+        window.onclick = function(event) {
+            if (!event.target.matches('.user-button') && !event.target.matches('.user-button *')) {
+                var dropdowns = document.getElementsByClassName('dropdown-menu');
+                for (var i = 0; i < dropdowns.length; i++) {
+                    var openDropdown = dropdowns[i];
+                    if (openDropdown.classList.contains('show')) {
+                        openDropdown.classList.remove('show');
+                    }
+                }
+            }
+        }
+    </script>
+</body>
+</html>
